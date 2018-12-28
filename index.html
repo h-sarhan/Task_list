@@ -16,6 +16,12 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <div class="row">
@@ -48,13 +54,16 @@
             <div class="form-group">
               <input
                 type="text"
-                class="form-control border-btm filter-task"
+                class="form-control border-btm filter-task mb-3"
                 placeholder="Filter Tasks"
               />
-              <div id="tasks"></div>
+              <ul id="tasks" class="list-group">
+                <div class="before"></div>
+              </ul>
+            </form>
               <button class="btn btn-dark text-white mt-3">CLEAR TASKS</button>
             </div>
-          </form>
+          
         </div>
       </div>
       <div class="col-2"></div>
@@ -74,5 +83,6 @@
       integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
       crossorigin="anonymous"
     ></script>
+    <script src="script.js"></script>
   </body>
 </html>
