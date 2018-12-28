@@ -1,19 +1,21 @@
+// Declaring DOM objects
 const task = document.querySelector(".new-task");
 const tasks = document.querySelector("#tasks");
 const addBtn = document.querySelector(".bg-aquamarine");
 const clearBtn = document.querySelector(".btn-dark");
 const filter = document.querySelector(".filter-task");
+// Declaring variables
 let counter = 0;
 let i = 0;
 let storedTasks;
 
+// Initializing Local Storage
 if (localStorage.getItem("Tasks") == null) {
 	storedTasks = [];
 } else {
 	storedTasks = JSON.parse(localStorage.getItem("Tasks"));
 	storedTasks.forEach(Task => {
 		counter += 1;
-		console.log(Task);
 		let t = document.createElement("li");
 		t.setAttribute("class", `list-group-item item-${counter}`);
 		t.textContent = Task;
@@ -29,13 +31,13 @@ if (localStorage.getItem("Tasks") == null) {
 	});
 }
 
+// Adding a task to the list and to local storage
 addBtn.addEventListener("click", e => {
 	e.preventDefault();
 	if (task.value !== "") {
 		counter += 1;
 		const newTask = document.createElement("li");
 		newTask.setAttribute("class", `list-group-item item-${counter}`);
-
 		storedTasks.push(task.value);
 		localStorage.setItem("Tasks", JSON.stringify(storedTasks));
 		newTask.textContent = task.value;
@@ -65,13 +67,14 @@ addBtn.addEventListener("click", e => {
 	}
 });
 
+// Prevent enter key from submitting clear tasks form
 filter.onkeypress = function(e) {
 	var key = e.charCode || e.keyCode || 0;
 	if (key == 13) {
 		e.preventDefault();
 	}
 };
-
+// Clear all tasks
 clearBtn.addEventListener("click", e => {
 	e.preventDefault();
 	localStorage.clear();
@@ -82,16 +85,26 @@ clearBtn.addEventListener("click", e => {
 		}
 	}
 });
-
-function removeFromStorage(string) {
-	let r = localStorage.getItem("tasks");
+// Remove a task from local storage
+function removeFromStorage(s) {
+	let r = localStorage.getItem("Tasks");
+	r = JSON.parse(r);
+	let i = r.indexOf(s);
+	console.log(i);
+	r.splice(i, 1);
+	console.log(r);
+	r = JSON.stringify(r);
+	localStorage.setItem("Tasks", r);
 }
 
+// Delete a task from the list
 function deleteList(c) {
 	const taskDel = document.querySelector(`.item-${c}`);
 	taskDel.firstElementChild.addEventListener("click", () => {
 		if (confirm("Are you sure?")) {
 			taskDel.remove();
+			console.log(taskDel.textContent);
+			removeFromStorage(taskDel.textContent);
 		}
 	});
 }
